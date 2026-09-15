@@ -2,6 +2,8 @@ package presentation;
 
 import java.util.Scanner;
 
+import services.SubscriptionService;
+
 public class SubscriptionMenu {
     public static Scanner scan = new Scanner(System.in);
     
@@ -26,7 +28,7 @@ public class SubscriptionMenu {
                     pick = true;
                     break;
                 case 1:
-                    
+                    withCommitment();
                     break;
                 case 2:
                     
@@ -37,18 +39,21 @@ public class SubscriptionMenu {
         }
         
     }
-    public void withCommitment()
-    {
-        //String serviceName, String monthlyAmount, Date startDate, Date endDate, Status status, int commitmentDurationMonths
+    public static void withCommitment()
+    {   
+        
+            scan.nextLine(); //bash ne7ayad LeftOvers
+        
             System.out.println("****************************** Subscription With Commitment ******************************");
             System.err.println("Enter Your Service Name");
             String serviceName = scan.nextLine();
             System.err.println("Enter Your Monthly Payment Amount");
             String monthlyAmount = scan.nextLine();
-            System.err.println("Enter Your Service Start Date");
+            System.err.println("Enter Your Service Start Date (mm/dd/yy): ");
             String startDate = scan.nextLine();
-            System.err.println("Enter Your Service End Date");
+            System.err.println("Enter Your Service End Date (mm/dd/yy): ");
             String endDate = scan.nextLine();
-
+            
+            SubscriptionService.createWithCommitment(serviceName, monthlyAmount, startDate, endDate);
     }
 }

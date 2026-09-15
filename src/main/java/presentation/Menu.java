@@ -11,21 +11,23 @@ public class Menu {
         int choice;
         boolean picked = false;
 
-        System.out.println("********************************** Welcome To SubTrack **********************************");
-        System.out.println("1. Create subscriptions (with/without commitment)");
-        System.out.println("2. Modify or delete a subscription");
-        System.out.println("3. View the list of subscriptions");
-        System.out.println("4. Display payments for a subscription");
-        System.out.println("5. Record a payment");
-        System.out.println("6. Modify or delete a payment");
-        System.out.println("7. View missed payments with the total unpaid amount (for subscriptions with commitment)");
-        System.out.println("8. Display the amount paid for a subscription");
-        System.out.println("9. Display the 5 most recent payments");
-        System.out.println("10. Generate financial reports (monthly, annual, unpaid)");
-        System.out.println("0. Exit");
-        System.out.println("*****************************************************************************************");
+        
 
         while(!picked){
+            System.out.println("********************************** Welcome To SubTrack **********************************");
+            System.out.println("1. Create subscriptions (with/without commitment)");
+            System.out.println("2. Modify or delete a subscription");
+            System.out.println("3. View the list of subscriptions");
+            System.out.println("4. Display payments for a subscription");
+            System.out.println("5. Record a payment");
+            System.out.println("6. Modify or delete a payment");
+            System.out.println("7. View missed payments with the total unpaid amount (for subscriptions with commitment)");
+            System.out.println("8. Display the amount paid for a subscription");
+            System.out.println("9. Display the 5 most recent payments");
+            System.out.println("10. Generate financial reports (monthly, annual, unpaid)");
+            System.out.println("0. Exit");
+            System.out.println("*****************************************************************************************");
+
             choice = scan.nextInt();
             switch (choice) {
                 case 0:

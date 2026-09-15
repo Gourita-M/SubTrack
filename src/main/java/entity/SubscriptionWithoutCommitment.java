@@ -1,0 +1,12 @@
+package entity;
+
+import java.util.Date;
+
+public class SubscriptionWithoutCommitment extends Subscription{
+    
+    public SubscriptionWithoutCommitment(String serviceName, String monthlyAmount, Date startDate, Date endDate, Status status, int commitmentDurationMonths)
+    {
+        super(serviceName, monthlyAmount, startDate, endDate, status);
+        
+    }
+}

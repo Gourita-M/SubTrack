@@ -19,12 +19,6 @@ public abstract class Subscription {
         this.status = status;
     }
 
-    public enum Status {
-        Active,
-        Suspended,
-        Terminated
-    }
-
     public void setServiceName(String serviceName)
     {
         this.serviceName = serviceName;

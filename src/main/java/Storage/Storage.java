@@ -2,15 +2,15 @@ package Storage;
 
 import java.util.HashMap;
 
+import entity.SubscriptionWithCommitment;
 import entity.SubscriptionWithoutCommitment;
-import entity.SubsctiptionWithCommitment;
 
 public class Storage {
 
     public static HashMap<String, SubscriptionWithoutCommitment> storageWithout = new HashMap<>();
-    public static HashMap<String, SubsctiptionWithCommitment> storageWith = new HashMap<>();
+    public static HashMap<String, SubscriptionWithCommitment> storageWith = new HashMap<>();
     
-    public static void setStoragewith(String key, SubsctiptionWithCommitment with)
+    public static void setStoragewith(String key, SubscriptionWithCommitment with)
     {
         storageWith.put(key, with);
     }
@@ -22,7 +22,7 @@ public class Storage {
     {
         return storageWithout;
     }
-    public static HashMap<String, SubsctiptionWithCommitment> getStorageWith()
+    public static HashMap<String, SubscriptionWithCommitment> getStorageWith()
     {
         return storageWith;
     }

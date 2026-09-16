@@ -2,7 +2,9 @@ package services;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import entity.SubsctiptionWithCommitment;
+
+import dao.SubscriptionDAO;
+import entity.Status;
 
 public class SubscriptionService {
     
@@ -15,20 +17,34 @@ public class SubscriptionService {
             System.err.println("Enter Your Service End Date (mm/dd/yy): ");
             Date endDate = format.parse(endDat);
 
-            SubsctiptionWithCommitment subscribe = new SubsctiptionWithCommitment(serviceName, monthlyAmount, startDate, endDate, Status.Active, 5);
+            long diffrence = endDate.getTime() - startDate.getTime();
+            long days = diffrence / (1000 * 60 * 60 * 24);
 
-            } catch(Exception e){
+            SubscriptionDAO subscriptionDAO = new SubscriptionDAO();
+            subscriptionDAO.creatSubscriptionWith(serviceName, monthlyAmount, startDate, endDate, Status.Active, days);
 
+            }catch(Exception e){
                 System.out.println("Invalid Date Formate");
-
             }
 
         
 
     }
-    public void createWithoutCommitment()
+    public static void createWithoutCommitment(String serviceName, String monthlyAmount, String startDat, String endDat)
     {
+        SimpleDateFormat format = new SimpleDateFormat("MM/dd/yy");
 
+        try{
+            Date startDate = format.parse(startDat);
+            System.err.println("Enter Your Service End Date (mm/dd/yy): ");
+            Date endDate = format.parse(endDat);
+
+            SubscriptionDAO subscriptionDAO = new SubscriptionDAO();
+            subscriptionDAO.creatSubscriptionWithout(serviceName, monthlyAmount, startDate, endDate, Status.Active);
+
+            }catch(Exception e){
+                System.out.println("Invalid Date Formate");
+            }
     }
     public void modification()
     {
@@ -41,5 +57,15 @@ public class SubscriptionService {
     public void finished()
     {
 
+    }
+
+    public static void listWith()
+    {
+        SubscriptionDAO.showAllSubsWith();
+    }
+
+    public static void listWithout()
+    {
+        SubscriptionDAO.showAllSubsWithout();
     }
 }

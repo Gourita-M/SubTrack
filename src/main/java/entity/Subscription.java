@@ -60,4 +60,17 @@ public abstract class Subscription {
     {
         return status;
     }
+    public String getId()
+    {
+        return id;
+    }
+    public void setId(String id)
+    {
+        this.id = id;
+    }
+
+    public String toString()
+    {
+        return getId() + "- Service Name: " + getServiceName() + ". Amount: " + getMonthlyAmount() + "DH From: "+ getStartDate() + " To: " + getEndDate();
+    }
 }

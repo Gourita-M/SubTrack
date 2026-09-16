@@ -31,7 +31,7 @@ public class SubscriptionMenu {
                     withCommitment();
                     break;
                 case 2:
-                    
+                    withoutCommitment();
                     break;
                 default:
                     System.out.println("Invalid Choice. Please Try Again");
@@ -55,5 +55,22 @@ public class SubscriptionMenu {
             String endDate = scan.nextLine();
             
             SubscriptionService.createWithCommitment(serviceName, monthlyAmount, startDate, endDate);
+
+    }
+    public static void withoutCommitment()
+    {
+            scan.nextLine(); //bash ne7ayad LeftOvers
+        
+            System.out.println("****************************** Subscription Without Commitment ******************************");
+            System.err.println("Enter Your Service Name");
+            String serviceName = scan.nextLine();
+            System.err.println("Enter Your Monthly Payment Amount");
+            String monthlyAmount = scan.nextLine();
+            System.err.println("Enter Your Service Start Date (mm/dd/yy): ");
+            String startDate = scan.nextLine();
+            System.err.println("Enter Your Service End Date (mm/dd/yy): ");
+            String endDate = scan.nextLine();
+
+            SubscriptionService.createWithoutCommitment(serviceName, monthlyAmount, startDate, endDate);
     }
 }

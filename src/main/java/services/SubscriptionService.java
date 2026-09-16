@@ -27,9 +27,8 @@ public class SubscriptionService {
                 System.out.println("Invalid Date Formate");
             }
 
-        
-
     }
+
     public static void createWithoutCommitment(String serviceName, String monthlyAmount, String startDat, String endDat)
     {
         SimpleDateFormat format = new SimpleDateFormat("MM/dd/yy");
@@ -46,14 +45,21 @@ public class SubscriptionService {
                 System.out.println("Invalid Date Formate");
             }
     }
-    public void modification()
-    {
 
-    }
-    public void delete()
+    public static void modification()
     {
-
+        
     }
+
+    public static void delete(String ServiceName)
+    {
+        if(SubscriptionDAO.deleteSubscription(ServiceName)){
+            System.err.println("Service is Deleted");
+        }else{
+            System.out.println("Service is Not Found");
+        }
+    }
+
     public void finished()
     {
 

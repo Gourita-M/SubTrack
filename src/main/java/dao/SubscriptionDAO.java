@@ -9,22 +9,22 @@ import entity.SubscriptionWithoutCommitment;
 
 public class SubscriptionDAO {
 
-    public Integer creatSubscriptionWith(String serviceName, String monthlyAmount, Date startDate, Date endDate, Status status, long commitmentDurationMonths)
+    public void creatSubscriptionWith(String serviceName, String monthlyAmount, Date startDate, Date endDate, Status status, long commitmentDurationMonths)
     {
         SubscriptionWithCommitment subsctiptionWithCommitment = new SubscriptionWithCommitment(serviceName, monthlyAmount, startDate, endDate, status, commitmentDurationMonths);
-        if(Storage.getStorageWith().containsKey(serviceName)){
+        if(Storage.getStorageWith().containsKey(serviceName)
+            || Storage.getStorageWithout().containsKey(serviceName)){
             System.out.println("You Already Get This Service");
         }else{
         Storage.setStoragewith(serviceName, subsctiptionWithCommitment);
-        return subsctiptionWithCommitment.getId();
         }
-        return null;
     }
 
     public void creatSubscriptionWithout(String serviceName, String monthlyAmount, Date startDate, Date endDate, Status status)
     {
         SubscriptionWithoutCommitment subscriptionWithoutCommitment = new SubscriptionWithoutCommitment(serviceName, monthlyAmount, startDate, endDate, status);
-        if(Storage.getStorageWith().containsKey(serviceName)){
+        if(Storage.getStorageWith().containsKey(serviceName)
+            || Storage.getStorageWithout().containsKey(serviceName)){
             System.out.println("You Already Get This Service");
         }else{
         Storage.setStoragewithout(serviceName, subscriptionWithoutCommitment);

@@ -39,4 +39,36 @@ public class Payment{
     {
         this.paymentType = paymentType;
     }
+
+    public int getPaymentId()
+    {
+        return paymentId;
+    }
+
+    public int getSubscriptionId()
+    {
+        return subscriptionId;
+    }
+
+    public Date getDueDate()
+    {
+        return dueDate;
+    }
+
+    public Date getPaymentDate()
+    {
+        return paymentDate;
+    }
+
+    public PaymentStatus getPaymentType()
+    {
+        return paymentType;
+    }
+
+    @Override
+    public String toString()
+    {
+        return "Payment " + paymentId + " - Due date: " + dueDate
+                + ", Payment date: " + paymentDate + ", Status: " + paymentType;
+    }
 }

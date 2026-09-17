@@ -1,12 +1,10 @@
 package presentation;
 
-import java.util.Scanner;
-
 import services.SubscriptionService;
 
 public class SubscriptionMenu {
-    public static Scanner scan = new Scanner(System.in);
-    
+    public static java.util.Scanner scan = Menu.scan;
+
     public static void show()
     {
         int choice;

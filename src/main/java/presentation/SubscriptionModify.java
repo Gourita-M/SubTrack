@@ -1,12 +1,10 @@
 package presentation;
 
-import java.util.Scanner;
-
 import services.SubscriptionService;
 
 public class SubscriptionModify {
 
-    public static Scanner scan = new Scanner(System.in);
+    public static java.util.Scanner scan = Menu.scan;
     
     public static void show()
     {
@@ -46,14 +44,10 @@ public class SubscriptionModify {
         scan.nextLine();
         System.out.println("Enter Service Name: ");
         String serviceName = scan.nextLine();
-        
-        // if(!SubscriptionDAO.findByServiceName(serviceName)){
-        //     System.out.println("Service is Not Found");   
-        // }else{
+        System.out.println("Enter New Monthly Payment Amount: ");
+        String monthlyAmount = scan.nextLine();
 
-        //     SubscriptionService.modification();
-
-        // }
+        SubscriptionService.modification(serviceName, monthlyAmount);
     }
 
     public static void delete()

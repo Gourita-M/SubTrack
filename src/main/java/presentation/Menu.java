@@ -50,7 +50,12 @@ public class Menu {
                     services.PaymentService.displayPaymentsForSubscription(serviceName);
                     break;
                 case 5:
-                    
+                    scan.nextLine();
+                    System.out.println("Enter Service Name: ");
+                    String paymentServiceName = scan.nextLine();
+                    System.out.println("Enter Payment Date (mm/dd/yy): ");
+                    String paymentDate = scan.nextLine();
+                    services.PaymentService.recordPayment(paymentServiceName, paymentDate);
                     break;
                 case 6:
                     

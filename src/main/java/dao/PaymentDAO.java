@@ -48,6 +48,28 @@ public class PaymentDAO {
 
         return subscriptionPayments;
     }
+
+    public static boolean recordPayment(String serviceName, Date paymentDate)
+    {
+        List<Payment> subscriptionPayments = findBySubscription(serviceName);
+
+        for (Payment payment : subscriptionPayments) {
+            if (payment.getPaymentType() == PaymentStatus.Unpaid
+                    || payment.getPaymentType() == PaymentStatus.Late) {
+                payment.setPaymentDate(paymentDate);
+                payment.setPaymentType(PaymentStatus.Paid);
+                return true;
+            }
+        }
+
+        if (Storage.getStorageWith().containsKey(serviceName)
+                || Storage.getStorageWithout().containsKey(serviceName)) {
+            createPayment(serviceName, paymentDate, paymentDate, PaymentStatus.Paid);
+            return true;
+        }
+
+        return false;
+    }
     public void findAll()
     {
 

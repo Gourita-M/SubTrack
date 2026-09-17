@@ -3,23 +3,23 @@ package entity;
 import java.util.Date;
 
 public class Payment{
-
-    private String paymentId;
+    public static int counter = 0;
+    private int paymentId;
     private int subscriptionId;
     private Date dueDate;
     private Date paymentDate;
-    private Status paymentType;
+    private PaymentStatus paymentType;
 
-    public Payment(String paymentId, int subscriptionId, Date dueDate, Date paymentDate, Status paymentType)
+    public Payment(int subscriptionId, Date dueDate, Date paymentDate, PaymentStatus paymentType)
     {
-        this.paymentId = paymentId;
+        this.paymentId = counter++;
         this.subscriptionId = subscriptionId;
         this.dueDate = dueDate;
         this.paymentDate = paymentDate;
         this.paymentType = paymentType;
     }
 
-    public void setPaymentId(String paymentId)
+    public void setPaymentId(int paymentId)
     {
         this.paymentId = paymentId;
     }
@@ -35,14 +35,8 @@ public class Payment{
     {
         this.paymentDate = paymentDate;
     }
-    public void setPaymentType(Status paymentType)
+    public void setPaymentType(PaymentStatus paymentType)
     {
         this.paymentType = paymentType;
-    }
-
-    public enum Status {
-        Paid,
-        Unpaid,
-        Late
     }
 }

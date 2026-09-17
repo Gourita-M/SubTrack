@@ -2,7 +2,6 @@ package presentation;
 
 import java.util.Scanner;
 
-import dao.SubscriptionDAO;
 import services.SubscriptionService;
 
 public class SubscriptionModify {
@@ -48,13 +47,13 @@ public class SubscriptionModify {
         System.out.println("Enter Service Name: ");
         String serviceName = scan.nextLine();
         
-        if(!SubscriptionDAO.findByServiceName(serviceName)){
-            System.out.println("Service is Not Found");   
-        }else{
+        // if(!SubscriptionDAO.findByServiceName(serviceName)){
+        //     System.out.println("Service is Not Found");   
+        // }else{
 
-            SubscriptionService.modification();
+        //     SubscriptionService.modification();
 
-        }
+        // }
     }
 
     public static void delete()

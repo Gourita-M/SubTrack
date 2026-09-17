@@ -3,7 +3,8 @@ package entity;
 import java.util.Date;
 
 public abstract class Subscription {
-    private String id;
+    public static int count = 1;
+    private int id;
     private String serviceName;
     private String monthlyAmount;
     private Date startDate;
@@ -12,6 +13,7 @@ public abstract class Subscription {
 
     public Subscription(String serviceName, String monthlyAmount, Date startDate, Date endDate, Status status)
     {
+        this.id = count++;
         this.serviceName = serviceName;
         this.monthlyAmount = monthlyAmount;
         this.startDate = startDate;
@@ -60,11 +62,11 @@ public abstract class Subscription {
     {
         return status;
     }
-    public String getId()
+    public int getId()
     {
         return id;
     }
-    public void setId(String id)
+    public void setId(int id)
     {
         this.id = id;
     }

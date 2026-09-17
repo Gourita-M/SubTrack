@@ -41,14 +41,9 @@ public class SubscriptionDAO {
         .forEach(m -> System.out.println(m.toString()));
     }
 
-    public static boolean findByServiceName(String ServiceName)
+    public void findByServiceName(int id)
     {
-        if(Storage.getStorageWith().containsKey(ServiceName)){
-            return true;
-        }else if(Storage.getStorageWithout().containsKey(ServiceName)){
-            return true;
-        }
-        return false;
+        
     }
 
     public static SubscriptionWithCommitment updateSubscriptionWith(String ServiceName)
@@ -84,6 +79,7 @@ public class SubscriptionDAO {
             Storage.getStorageWithout().remove(ServiceName);
             return true;
         }
+
         return false;
     }
 

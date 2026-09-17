@@ -3,7 +3,9 @@ package services;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import dao.PaymentDAO;
 import dao.SubscriptionDAO;
+import entity.PaymentStatus;
 import entity.Status;
 
 public class SubscriptionService {
@@ -23,10 +25,13 @@ public class SubscriptionService {
             SubscriptionDAO subscriptionDAO = new SubscriptionDAO();
             subscriptionDAO.creatSubscriptionWith(serviceName, monthlyAmount, startDate, endDate, Status.Active, days);
 
+            //String serviceName, Date dueDate, Date paymentDate, Status paymentType
+            PaymentDAO.createPayment(serviceName, endDate, startDate, PaymentStatus.Paid);
+
             }catch(Exception e){
                 System.out.println("Invalid Date Formate");
             }
-
+        
     }
 
     public static void createWithoutCommitment(String serviceName, String monthlyAmount, String startDat, String endDat)

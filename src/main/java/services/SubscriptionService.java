@@ -1,6 +1,8 @@
 package services;
 
+import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 import dao.PaymentDAO;
@@ -13,23 +15,32 @@ public class SubscriptionService {
     public static void createWithCommitment(String serviceName, String monthlyAmount, String startDat, String endDat)
     {
         SimpleDateFormat format = new SimpleDateFormat("MM/dd/yy");
+        format.setLenient(false);
 
         try{
-            Date startDate = format.parse(startDat);
-            System.err.println("Enter Your Service End Date (mm/dd/yy): ");
-            Date endDate = format.parse(endDat);
+            Date startDate = parseDate(format, startDat);
+            Date endDate = parseDate(format, endDat);
 
-            long diffrence = endDate.getTime() - startDate.getTime();
-            long days = diffrence / (1000 * 60 * 60 * 24);
+            if (!endDate.after(startDate)) {
+                System.out.println("End date must be after start date.");
+                return;
+            }
+
+            Calendar startCalendar = Calendar.getInstance();
+            Calendar endCalendar = Calendar.getInstance();
+            startCalendar.setTime(startDate);
+            endCalendar.setTime(endDate);
+
+            long commitmentDurationMonths = (endCalendar.get(Calendar.YEAR) - startCalendar.get(Calendar.YEAR)) * 12L;
+            commitmentDurationMonths += endCalendar.get(Calendar.MONTH) - startCalendar.get(Calendar.MONTH);
 
             SubscriptionDAO subscriptionDAO = new SubscriptionDAO();
-            subscriptionDAO.creatSubscriptionWith(serviceName, monthlyAmount, startDate, endDate, Status.Active, days);
+            subscriptionDAO.creatSubscriptionWith(serviceName, monthlyAmount, startDate, endDate, Status.Active, commitmentDurationMonths);
 
-            //String serviceName, Date dueDate, Date paymentDate, Status paymentType
-            PaymentDAO.createPayment(serviceName, endDate, startDate, PaymentStatus.Paid);
+            PaymentDAO.createPayment(serviceName, endDate, null, PaymentStatus.Unpaid);
 
             }catch(Exception e){
-                System.out.println("Invalid Date Formate");
+                System.out.println("Invalid date format. Please use MM/dd/yy.");
             }
         
     }
@@ -37,23 +48,48 @@ public class SubscriptionService {
     public static void createWithoutCommitment(String serviceName, String monthlyAmount, String startDat, String endDat)
     {
         SimpleDateFormat format = new SimpleDateFormat("MM/dd/yy");
+        format.setLenient(false);
 
         try{
-            Date startDate = format.parse(startDat);
-            System.err.println("Enter Your Service End Date (mm/dd/yy): ");
-            Date endDate = format.parse(endDat);
+            Date startDate = parseDate(format, startDat);
+            Date endDate = parseDate(format, endDat);
+
+            if (!endDate.after(startDate)) {
+                System.out.println("End date must be after start date.");
+                return;
+            }
 
             SubscriptionDAO subscriptionDAO = new SubscriptionDAO();
             subscriptionDAO.creatSubscriptionWithout(serviceName, monthlyAmount, startDate, endDate, Status.Active);
 
             }catch(Exception e){
-                System.out.println("Invalid Date Formate");
+                System.out.println("Invalid date format. Please use MM/dd/yy.");
             }
     }
 
-    public static void modification()
+    private static Date parseDate(SimpleDateFormat format, String dateText) throws Exception
     {
-        
+        ParsePosition position = new ParsePosition(0);
+        Date date = format.parse(dateText, position);
+
+        if (date == null || position.getIndex() != dateText.length()) {
+            throw new Exception("Invalid date");
+        }
+
+        return date;
+    }
+
+    public static void modification(String serviceName, String monthlyAmount)
+    {
+        if (SubscriptionDAO.updateSubscriptionWith(serviceName) != null) {
+            SubscriptionDAO.updateSubscriptionWith(serviceName).setMonthlyAmount(monthlyAmount);
+            System.out.println("Subscription successfully modified.");
+        } else if (SubscriptionDAO.updateSubscriptionWithout(serviceName) != null) {
+            SubscriptionDAO.updateSubscriptionWithout(serviceName).setMonthlyAmount(monthlyAmount);
+            System.out.println("Subscription successfully modified.");
+        } else {
+            System.out.println("Service is Not Found");
+        }
     }
 
     public static void delete(String ServiceName)

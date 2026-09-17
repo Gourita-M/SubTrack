@@ -18,7 +18,7 @@ public class Menu {
             System.out.println("1. Create subscriptions (with/without commitment)"); // Done
             System.out.println("2. Modify or delete a subscription"); // kinda Done . Be9a liya ghi modify idk what to modify
             System.out.println("3. View the list of subscriptions"); // Done
-            System.out.println("4. Display payments for a subscription");
+            System.out.println("4. Display payments for a subscription"); 
             System.out.println("5. Record a payment");
             System.out.println("6. Modify or delete a payment");
             System.out.println("7. View missed payments with the total unpaid amount (for subscriptions with commitment)");

@@ -44,7 +44,10 @@ public class Menu {
                     SubscriptionList.show();
                     break;
                 case 4:
-                    
+                    scan.nextLine();
+                    System.out.println("Enter Service Name: ");
+                    String serviceName = scan.nextLine();
+                    services.PaymentService.displayPaymentsForSubscription(serviceName);
                     break;
                 case 5:
                     

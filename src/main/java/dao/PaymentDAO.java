@@ -24,10 +24,6 @@ public class PaymentDAO {
             Storage.setPayments(payment);
         }
     }   
-    public void findById(int id)
-    {
-
-    }
     public static List<Payment> findBySubscription(String serviceName)
     {
         int subscriptionId = -1;
@@ -70,6 +66,43 @@ public class PaymentDAO {
 
         return false;
     }
+
+    public static Payment findById(int paymentId)
+    {
+        for (Payment payment : Storage.getPayments()) {
+            if (payment.getPaymentId() == paymentId) {
+                return payment;
+            }
+        }
+
+        return null;
+    }
+
+    public static boolean deletePayment(int paymentId)
+    {
+        Payment payment = findById(paymentId);
+
+        if (payment != null) {
+            Storage.getPayments().remove(payment);
+            return true;
+        }
+
+        return false;
+    }
+
+    public static boolean updatePayment(int paymentId, Date paymentDate, PaymentStatus status)
+    {
+        Payment payment = findById(paymentId);
+
+        if (payment != null) {
+            payment.setPaymentDate(paymentDate);
+            payment.setPaymentType(status);
+            return true;
+        }
+
+        return false;
+    }
+
     public void findAll()
     {
 

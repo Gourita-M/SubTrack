@@ -58,13 +58,16 @@ public class Menu {
                     services.PaymentService.recordPayment(paymentServiceName, paymentDate);
                     break;
                 case 6:
-                    
+                    paymentMenu();
                     break;
                 case 7:
-                    
+                    System.out.println(services.PaymentService.getMissedPaymentsWithTotalUnpaidAmount());
                     break;
                 case 8:
-                    
+                    scan.nextLine();
+                    System.out.println("Enter Service Name: ");
+                    String amountServiceName = scan.nextLine();
+                    System.out.println(services.PaymentService.displayAmountPaidForSubscription(amountServiceName));
                     break;
                 case 9:
                     
@@ -78,5 +81,33 @@ public class Menu {
             }
         }
 
+    }
+
+    private static void paymentMenu()
+    {
+        System.out.println("1. Modify a payment");
+        System.out.println("2. Delete a payment");
+        System.out.println("0. Back");
+        System.out.println("Choose an option:");
+
+        int paymentChoice = scan.nextInt();
+        scan.nextLine();
+
+        if (paymentChoice == 1) {
+            System.out.println("Enter Payment ID: ");
+            int paymentId = scan.nextInt();
+            scan.nextLine();
+            System.out.println("Enter Payment Date (mm/dd/yy): ");
+            String paymentDate = scan.nextLine();
+            System.out.println("Enter Status (Paid, Unpaid, Late): ");
+            String status = scan.nextLine();
+            services.PaymentService.modifyPayment(paymentId, paymentDate, status);
+        } else if (paymentChoice == 2) {
+            System.out.println("Enter Payment ID: ");
+            int paymentId = scan.nextInt();
+            services.PaymentService.deletePayment(paymentId);
+        } else if (paymentChoice != 0) {
+            System.out.println("Invalid Choice. Please Try Again");
+        }
     }
 }
